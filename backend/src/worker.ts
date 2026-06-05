@@ -1,28 +1,17 @@
 import { Worker } from 'bullmq';
-import { QdrantVectorStore } from "@langchain/qdrant";
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf"
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import dotenv from 'dotenv';
 import prisma from './db/prisma';
+import { getVectorStore } from './db/qdrant';
 
 dotenv.config();
-
-const embeddings = new GoogleGenerativeAIEmbeddings({
-    apiKey: process.env.GEMINI_API_KEY,
-    model: "gemini-embedding-001",
-});
 
 const worker = new Worker('smart-buddy-queue', async (job) => {
     const data = job.data;
     console.log('🔄 Processing job:', job.id, data);
 
-    const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
-        url: 'https://dc306967-d253-4d73-800d-c83c6476f378.eu-west-2-0.aws.cloud.qdrant.io',
-        apiKey: process.env.QDRANT_API_KEY,
-        collectionName: "study-materials"
-    });
-    console.log("store initialized");
+    const vectorStore = await getVectorStore();
 
     const loader = new PDFLoader(data.path);
     const docs = await loader.load();
