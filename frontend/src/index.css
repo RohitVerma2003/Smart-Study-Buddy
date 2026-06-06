@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Balsamiq Sans";
+    src: url('./assets/Balsamiq_Sans/BalsamiqSans-Regular.ttf');
+}
+
+* {
+    font-family: Balsamiq Sans;
+}
+
+body{
+    background-color: #FBF5DD;
+}
