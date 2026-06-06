@@ -22,8 +22,8 @@ export class AuthService {
 
         if (!isPasswordCorrect) throw new AppError(401, "Invalid credentials");
 
-        const accessToken = generateAccessToken(user.id);
-        const refreshToken = generateRefreshToken(user.id);
+        const accessToken = generateAccessToken(user.id , user.email);
+        const refreshToken = generateRefreshToken(user.id , user.email);
 
         await prisma.user.update({
             where: {
@@ -60,8 +60,8 @@ export class AuthService {
             data: { name, email, password: hashedPassword }
         });
 
-        const accessToken = generateAccessToken(newUser.id);
-        const refreshToken = generateRefreshToken(newUser.id);
+        const accessToken = generateAccessToken(newUser.id , newUser.email);
+        const refreshToken = generateRefreshToken(newUser.id , newUser.email);
 
         await prisma.user.update({
             where: { id: newUser.id },
@@ -95,8 +95,8 @@ export class AuthService {
             throw new Error("Invalid refresh token");
         }
 
-        const newAccessToken = generateAccessToken(user.id);
-        const newRefreshToken = generateRefreshToken(user.id);
+        const newAccessToken = generateAccessToken(user.id , user.email);
+        const newRefreshToken = generateRefreshToken(user.id , user.email);
 
         await prisma.user.update({
             where: {

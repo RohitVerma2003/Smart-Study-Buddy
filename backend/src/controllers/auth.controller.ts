@@ -109,6 +109,16 @@ export class AuthController {
         }
     };
 
+    me = async (req: Request , res: Response) => {
+        return res.status(200).json({
+            success: true,
+            data:{
+                userId: req.user?.userId,
+                email: req.user?.email
+            }
+        })
+    }
+
     private handleError(error: unknown, res: Response) {
         if (error instanceof AppError) {
             return res.status(error.statusCode).json({
