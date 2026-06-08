@@ -7,5 +7,6 @@ const documentController = new DocumentController();
 
 router.post('/start-chat' , authMiddleware , documentController.startChat);
 router.get('/check-status/:fileId' , authMiddleware , documentController.checkStatus);
+router.get('/files' , authMiddleware , documentController.getDocuments);
 
 export default router;
