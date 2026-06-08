@@ -3,9 +3,9 @@ import { Spinner } from "../../components/ui/spinner"
 
 const Loader = () => {
     return (
-        <div className="flex flex-col justify-center items-center gap-4 w-screen h-screen">
+        <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
             <Button className="bg-green-500">
-                <Spinner data-icon="inline-start" color="black"/>
+                <Spinner data-icon="inline-start" color="black" />
                 Loading...
             </Button>
         </div>
