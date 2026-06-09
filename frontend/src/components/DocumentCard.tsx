@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 
 type DocumentCardProps = {
     document: any;
+    startEmbedding: (fileId: string) => Promise<any>;
+    embedding: boolean;
 };
 
 const statusMap = {
@@ -43,7 +45,7 @@ const statusMap = {
 };
 
 export default function DocumentCard({
-    document,
+    document, startEmbedding, embedding
 }: DocumentCardProps) {
     const navigate = useNavigate();
 
@@ -61,8 +63,9 @@ export default function DocumentCard({
         );
     };
 
-    const handleChat = () => {
-        navigate(`/chat/${document.id}`);
+    const handleChat = async () => {
+        const data = await startEmbedding(document.id);
+        if (data.status === 'COMPLETED') navigate(`/chat/${document.id}`);
     };
 
     return (
@@ -108,17 +111,36 @@ export default function DocumentCard({
                         Open
                     </Button>
 
-                    <Button
-                        variant={'outline'}
-                        className="flex-1 cursor-pointer bg-green-500"
-                        onClick={handleChat}
-                        disabled={
-                            document.embeddingStatus !==
-                            "COMPLETED"
-                        }
-                    >
-                        Chat
-                    </Button>
+                    {(document.embeddingStatus === "PENDING" || document.embeddingStatus === "FAILED") && (
+                        <Button
+                            onClick={handleChat}
+                            variant={'outline'}
+                            className="flex-1 cursor-pointer bg-green-500"
+                            disabled={embedding}
+                        >
+                            Embed
+                        </Button>
+                    )}
+
+                    {document.embeddingStatus === "PROCESSING" && (
+                        <Button
+                            disabled
+                            variant={'outline'}
+                            className="flex-1 cursor-pointer bg-green-500">
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Embedding...
+                        </Button>
+                    )}
+
+                    {document.embeddingStatus === "COMPLETED" && (
+                        <Button
+                            variant={'outline'}
+                            className="flex-1 cursor-pointer bg-green-500"
+                            onClick={handleChat}
+                        >
+                            Chat
+                        </Button>
+                    )}
                 </div>
             </CardContent>
         </Card>

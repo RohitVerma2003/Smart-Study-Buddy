@@ -85,7 +85,7 @@ export const AuthProvider = ({
             await checkAuth();
 
             toast.success("Log in Successful");
-            navigate('/');
+            navigate('/dashboard');
         } catch (error: any) {
             toast.error(
                 error.response?.data?.message ||
@@ -106,7 +106,7 @@ export const AuthProvider = ({
             await checkAuth();
             
             toast.success("Sign up Successful");
-            navigate('/');
+            navigate('/dashboard');
         } catch (error: any) {
             toast.error(
                 error.response?.data?.message ||

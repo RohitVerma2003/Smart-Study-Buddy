@@ -21,7 +21,18 @@ const worker = new Worker('smart-buddy-queue', async (job) => {
     const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 500, chunkOverlap: 0 })
     const texts = await splitter.splitDocuments(docs);
 
-    await vectorStore.addDocuments(texts);
+    const chunks = texts.map((doc, index) => ({
+        pageContent: doc.pageContent,
+        metadata: {
+            fileId: data.fileId,
+            userId: data.userId,
+            fileName: data.filename,
+            chunkIndex: index,
+            uploadedAt: new Date().toISOString()
+        }
+    }));
+
+    await vectorStore.addDocuments(chunks);
     console.log("job done");
 
     await prisma.file.update({
@@ -40,7 +51,7 @@ const worker = new Worker('smart-buddy-queue', async (job) => {
         host: 'localhost',
         port: 6379
     },
-    concurrency: 5
+    concurrency: 1
 });
 
 worker.on("completed", (job) => {

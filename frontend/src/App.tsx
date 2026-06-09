@@ -8,6 +8,7 @@ import Dashboard from "./pages/layout/Dashboard"
 import AppLayout from "./pages/layout/AppLayout"
 import Documents from "./pages/layout/Documents"
 import Canvas from "./pages/layout/Canvas"
+import Chat from "./pages/layout/Chat"
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
           <Route path="/documents" element={<Protected><Documents /></Protected>} />
           <Route path="/canvas" element={<Protected><Canvas /></Protected>} />
+          <Route path="/chat/:documentId" element={<Protected><Chat /></Protected>} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />

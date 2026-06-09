@@ -2,16 +2,22 @@ import { useEffect } from "react";
 import useDocs from "../../hooks/useDocs";
 import Loader from "../../components/Loader";
 import DocumentCard from "../../components/DocumentCard";
-import { FileText } from "lucide-react";
+import { FileText, RefreshCcw } from "lucide-react";
 import UploadDocumentDialog from "../../components/UploadDocumentDialog";
+import { Button } from "../../../components/ui/button";
 
 const Documents = () => {
   const {
     data,
     loading,
+    embedding,
     getDocuments,
-    uploadDocument
+    uploadDocument,
+    startEmbedding,
+    reload
   } = useDocs();
+
+
 
   useEffect(() => {
     getDocuments(1);
@@ -42,9 +48,14 @@ const Documents = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">
-            Documents
-          </h1>
+          <div className="flex gap-3">
+            <h1 className="text-3xl font-bold">
+              Documents
+            </h1>
+            <Button variant={"outline"} className="p-2 bg-green-500 cursor-pointer" onClick={reload}>
+              <RefreshCcw />
+            </Button>
+          </div>
 
           <p className="text-muted-foreground">
             Upload and manage your study
@@ -59,6 +70,8 @@ const Documents = () => {
           <DocumentCard
             key={document.id}
             document={document}
+            startEmbedding={startEmbedding}
+            embedding={embedding}
           />
         ))}
       </div>

@@ -51,7 +51,8 @@ export class IngestionService {
         await this.queue.add('pdf-job', {
             fileId: file.id,
             filename: file.fileName,
-            path: file.path
+            path: file.path,
+            userId
         });
 
         return {
