@@ -1,0 +1,235 @@
+{
+  title: 'SQL Fundamentals and Advanced Concepts Quiz',
+  durationMinutes: 25,
+  totalQuestions: 20,
+  questions: [
+    {
+      type: 'MCQ',
+      question: 'What is the primary purpose of the WHERE clause in SQL?',
+      options: [Array
+      ],
+      correctAnswer: 'To filter rows based on a condition',
+      modelAnswer: null,
+      explanation: 'The WHERE clause is used to filter individual rows based on a specified condition before any grouping or aggregation occurs.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 1
+    },
+    {
+      type: 'MCQ',
+      question: 'Which of the following SQL commands is used to retrieve all columns from a table named `employees`?',
+      options: [Array
+      ],
+      correctAnswer: 'SELECT * FROM employees;',
+      modelAnswer: null,
+      explanation: 'The asterisk (*) is a wildcard used in the SELECT statement to indicate that all columns from the specified table should be returned.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 2
+    },
+    {
+      type: 'MCQ',
+      question: 'Which of the following is an aggregate function in SQL?',
+      options: [Array
+      ],
+      correctAnswer: 'SUM()',
+      modelAnswer: null,
+      explanation: 'SUM(), COUNT(), AVG(), MIN(), and MAX() are common aggregate functions used to perform calculations on a set of rows.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 3
+    },
+    {
+      type: 'MCQ',
+      question: 'What is the purpose of a `PRIMARY KEY`?',
+      options: [Array
+      ],
+      correctAnswer: 'To uniquely identify each row in a table and prevent NULL values',
+      modelAnswer: null,
+      explanation: 'A Primary Key is a column or set of columns that uniquely identifies each record in a table and cannot contain NULL values.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 4
+    },
+    {
+      type: 'MCQ',
+      question: 'What is the key difference between `UNION` and `UNION ALL`?',
+      options: [Array
+      ],
+      correctAnswer: 'UNION removes duplicate rows; UNION ALL includes all rows',
+      modelAnswer: null,
+      explanation: 'UNION combines the result sets of two or more SELECT statements and automatically removes duplicate rows, while UNION ALL combines them but keeps all rows, including duplicates, making it often faster.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 5
+    },
+    {
+      type: 'MCQ',
+      question: 'Which ACID property ensures that all changes within a transaction are either fully completed or entirely undone?',
+      options: [Array
+      ],
+      correctAnswer: 'Atomicity',
+      modelAnswer: null,
+      explanation: 'Atomicity ensures that a transaction is treated as a single, indivisible unit of work. Either all of its operations are performed, or none of them are.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 6
+    },
+    {
+      type: 'MCQ',
+      question: 'In the context of `RANK()` vs `DENSE_RANK()`, what is the primary difference when dealing with tied values?',
+      options: [Array
+      ],
+      correctAnswer: 'RANK() leaves gaps after ties; DENSE_RANK() assigns consecutive ranks',
+      modelAnswer: null,
+      explanation: 'RANK() assigns a rank to each row within a partition, but if there are ties, it leaves gaps in the ranking sequence. DENSE_RANK() also assigns a rank, but it assigns consecutive ranks, meaning it does not leave gaps after ties.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 7
+    },
+    {
+      type: 'MCQ',
+      question: 'When optimizing SQL queries, why is checking the execution plan important?',
+      options: [Array
+      ],
+      correctAnswer: 'To identify bottlenecks, access paths, join types, and index usage',
+      modelAnswer: null,
+      explanation: 'The execution plan provides detailed information about how a database system will execute a SQL query, showing access paths (e.g., table scan, index seek), join types, and whether indexes are being used effectively, which helps in identifying and resolving performance bottlenecks.',
+      difficulty: 'HARD',
+      marks: 1,
+      order: 8
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: '`DELETE` removes selected rows and can be rolled back, while `TRUNCATE` removes all rows and is generally faster.',
+      options: null,
+      correctAnswer: 'TRUE',
+      modelAnswer: null,
+      explanation: 'DELETE operates row-by-row, allows a WHERE clause, and is transactionally safe (can be rolled back). TRUNCATE is a DDL command, deallocates data pages, is much faster, and cannot be rolled back.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 9
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: 'The `LIKE` operator is used for exact string matching only.',
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'The LIKE operator is used for pattern matching with wildcards like % (any sequence of zero or more characters) and _ (any single character).',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 10
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: 'A `Foreign Key` always points to a `Primary Key` in another table to maintain referential integrity.',
+      options: null,
+      correctAnswer: 'TRUE',
+      modelAnswer: null,
+      explanation: 'A Foreign Key is a column or set of columns in one table that refers to the Primary Key (or a Unique Key) in another table, enforcing referential integrity and maintaining relationships between tables.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 11
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: 'A `View` is a physical table that stores the results of its query for faster access.',
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'A View is a virtual table based on a SELECT statement. It does not store data itself but rather provides a dynamic window into the underlying data.',
+      difficulty: 'EASY',
+      marks: 1,
+      order: 12
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: '`Normalization` involves introducing redundancy to improve read performance, common in OLAP systems.',
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'Normalization is the process of structuring data to reduce redundancy and improve data integrity. Denormalization is the process of introducing redundancy for performance, which is common in OLAP systems.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 13
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: "A `Materialized View` is a virtual table that re-executes its underlying query every time it's accessed, providing always up-to-date data.",
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'A `View` is a virtual table that re-executes its query. A `Materialized View` stores the results of its query physically, providing faster reads but requiring periodic refreshes to update its data.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 14
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: '`OLTP` systems are primarily designed for analytical queries over historical data, involving large read operations.',
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'OLTP (Online Transaction Processing) systems are designed for transactional operations, involving many small, frequent writes and reads, often for day-to-day business operations. OLAP (Online Analytical Processing) systems are designed for complex analytical queries over large historical datasets.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 15
+    },
+    {
+      type: 'TRUE_FALSE',
+      question: '`Serializable` is the lowest transaction isolation level, allowing the most read phenomena like dirty reads and non-repeatable reads.',
+      options: null,
+      correctAnswer: 'FALSE',
+      modelAnswer: null,
+      explanation: 'Serializable is the highest transaction isolation level, preventing all read phenomena including dirty reads, non-repeatable reads, and phantom reads. Read Uncommitted is typically the lowest isolation level, allowing dirty reads.',
+      difficulty: 'MEDIUM',
+      marks: 1,
+      order: 16
+    },
+    {
+      type: 'SHORT_ANSWER',
+      question: 'What is `Referential Integrity` in a relational database, and how is it typically enforced?',
+      options: null,
+      correctAnswer: null,
+      modelAnswer: 'Referential integrity is a property of data that ensures that all foreign key references in a database are valid. This means that a foreign key in one table must always point to an existing primary key (or unique key) in another table, or be NULL. It is typically enforced using `FOREIGN KEY` constraints. When a foreign key constraint is in place, the database management system prevents actions that would create "orphaned" records, such as deleting a primary key record that is still referenced by foreign keys, or inserting a foreign key value that does not exist in the referenced primary key table.',
+      explanation: 'The answer should define referential integrity as ensuring valid foreign key relationships and explain how `FOREIGN KEY` constraints are used to enforce it, preventing inconsistent data states.',
+      difficulty: 'MEDIUM',
+      marks: 5,
+      order: 17
+    },
+    {
+      type: 'SHORT_ANSWER',
+      question: 'Explain the difference between `DELETE`, `TRUNCATE`, and `DROP` commands in SQL, specifically regarding their impact on data, table structure, and transactional behavior.',
+      options: null,
+      correctAnswer: null,
+      modelAnswer: 'DELETE removes specific rows (or all rows if no WHERE clause is specified) from a table. It is a DML (Data Manipulation Language) command, allows a WHERE clause, and the operation can be rolled back. TRUNCATE removes all rows from a table quickly by deallocating the data pages, but it preserves the table structure. It is a DDL (Data Definition Language) command and generally cannot be rolled back. DROP removes the entire table definition (structure) and all its data from the database. It is also a DDL command and cannot be rolled back.',
+      explanation: "The answer should distinguish the DML `DELETE` from DDL `TRUNCATE` and `DROP`, highlighting `DELETE`'s row-level removal and rollback capability, `TRUNCATE`'s fast all-row removal while keeping structure, and `DROP`'s complete table removal.",
+      difficulty: 'HARD',
+      marks: 5,
+      order: 18
+    },
+    {
+      type: 'SHORT_ANSWER',
+      question: 'Describe the concept of a `Deadlock` in database transactions. What are its characteristics, and why is it a problem?',
+      options: null,
+      correctAnswer: null,
+      modelAnswer: 'A deadlock occurs when two or more transactions are each waiting for the other to release a lock on a resource, resulting in a standstill where neither transaction can proceed. Characteristics include mutual exclusion (only one transaction can hold a resource at a time), hold and wait (transactions holding resources while waiting for others), no preemption (resources cannot be forcibly taken), and circular wait (a circular chain of transactions, each waiting for a resource held by the next). Deadlocks are a problem because they can cause applications to freeze, lead to transaction timeouts, and negatively impact database performance and concurrency by tying up resources indefinitely.',
+      explanation: 'The answer should define deadlock, list its four necessary conditions (mutual exclusion, hold and wait, no preemption, circular wait), and explain why it poses a challenge for database systems, impacting performance and availability.',
+      difficulty: 'HARD',
+      marks: 5,
+      order: 19
+    },
+    {
+      type: 'SHORT_ANSWER',
+      question: 'Explain the advantages of using `CTEs (Common Table Expressions)` over traditional `Subqueries` for complex SQL queries, and provide an example of a scenario where a `Recursive CTE` would be particularly beneficial.',
+      options: null,
+      correctAnswer: null,
+      modelAnswer: 'CTEs offer several advantages over subqueries. They improve readability and organization by allowing complex queries to be broken down into logical, named, temporary result sets, making the SQL easier to understand and maintain. They also promote reusability, as a CTE can be referenced multiple times within the same query without re-writing the logic. Furthermore, CTEs support recursion, which is not possible with standard subqueries. A `Recursive CTE` is particularly beneficial for traversing hierarchical or tree-like data structures, such as organizational charts (employees and their managers), bill-of-materials, or category hierarchies. For example, finding all employees under a specific manager in a multi-level organizational structure would be a strong candidate for a recursive CTE, as it allows iteratively querying the same CTE to build the full chain.',
+      explanation: 'The answer should outline readability, reusability, and recursion as key advantages of CTEs. For the recursive CTE example, it should clearly identify hierarchical data traversal (e.g., org charts, categories) as a beneficial use case.',
+      difficulty: 'HARD',
+      marks: 5,
+      order: 20
+    }
+  ]
+}

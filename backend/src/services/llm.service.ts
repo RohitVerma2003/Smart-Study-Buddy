@@ -1,5 +1,6 @@
 import { ChatGoogle } from "@langchain/google";
 import { HumanMessage, SystemMessage } from "langchain";
+import { QuizSchema } from "../utilities/zod";
 
 export class LLMService {
     private llm;
@@ -18,5 +19,11 @@ export class LLMService {
         ]);
 
         return aiMessage;
+    }
+
+    quizWithGemini = async (prompt: string)=>{
+        const model = this.llm.withStructuredOutput(QuizSchema);
+        const aiResponse = await model.invoke(prompt);
+        return aiResponse;
     }
 }

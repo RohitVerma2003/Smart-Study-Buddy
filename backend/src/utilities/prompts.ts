@@ -31,3 +31,117 @@ ${JSON.stringify(retrieveData)}
 
 Provide a clear educational explanation based only on the information available in the retrieved context.`
 }
+
+export const promptForQuizGeneration = (retrieveData: any) => {
+    return `You are an expert educational assessment designer.
+
+    Your task is to generate a comprehensive quiz from the provided study material.
+
+    # Requirements
+
+    Generate exactly:
+
+    * 8 MCQ questions
+    * 8 True/False questions
+    * 4 Short Answer questions
+
+    Total Questions = 20
+
+    The quiz must comprehensively cover the study material and test understanding of the most important concepts.
+
+    # Difficulty Distribution
+
+    Across all questions:
+
+    * 40% EASY
+    * 40% MEDIUM
+    * 20% HARD
+
+    Use only the following difficulty values:
+
+    * EASY
+    * MEDIUM
+    * HARD
+
+    # Question Quality Rules
+
+    1. Questions must be based ONLY on the provided context.
+    2. Avoid duplicate questions.
+    3. Cover multiple topics from the study material.
+    4. Questions should test understanding, not only memorization.
+    5. Short answer questions should require explanation and reasoning.
+    6. Every question must include a concise explanation.
+    7. MCQ options should be realistic and non-obvious.
+    8. Only one MCQ option should be correct.
+
+    # Marks Allocation
+
+    * MCQ = 1 mark
+    * TRUE_FALSE = 1 mark
+    * SHORT_ANSWER = 5 marks
+
+    # Output Format
+
+    Return ONLY valid JSON.
+
+    Do NOT return markdown.
+
+    Do NOT use code blocks.
+
+    Do NOT include any text before or after the JSON.
+
+    Use this exact schema:
+
+    {
+    "title": "Quiz Title",
+    "durationMinutes": 25,
+    "totalQuestions": 20,
+    "questions": [
+    {
+    "type": "MCQ",
+    "question": "Question text",
+    "options": [
+    "Option A",
+    "Option B",
+    "Option C",
+    "Option D"
+    ],
+    "correctAnswer": "Option A",
+    "modelAnswer": null,
+    "explanation": "Explanation of the answer",
+    "difficulty": "EASY",
+    "marks": 1,
+    "order": 1
+    },
+    {
+    "type": "TRUE_FALSE",
+    "question": "Question text",
+    "options": null,
+    "correctAnswer": "TRUE",
+    "modelAnswer": null,
+    "explanation": "Explanation of the answer",
+    "difficulty": "MEDIUM",
+    "marks": 1,
+    "order": 9
+    },
+    {
+    "type": "SHORT_ANSWER",
+    "question": "Question text",
+    "options": null,
+    "correctAnswer": null,
+    "modelAnswer": "Ideal answer expected from the student",
+    "explanation": "Key concepts that should be covered",
+    "difficulty": "HARD",
+    "marks": 5,
+    "order": 17
+    }
+    ]
+    }
+
+    # Context
+
+    ${retrieveData}
+
+    Generate the quiz now.
+`
+}

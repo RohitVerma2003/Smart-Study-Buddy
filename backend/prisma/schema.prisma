@@ -13,39 +13,124 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  name          String
-  email         String   @unique
-  password      String
+  name     String
+  email    String @unique
+  password String
 
-  refreshToken  String?
+  refreshToken String?
 
-  files     File[]
+  files File[]
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model File {
-  id          String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  fileName    String
+  fileName     String
   originalName String
 
-  fileType    String
-  fileSize    Int
+  fileType String
+  fileSize Int
 
-  path        String
+  path String
 
-  userId      String
-  user        User @relation(fields: [userId], references: [id])
-  embeddingStatus   EmbeddingStatus @default(PENDING)
+  userId          String
+  user            User            @relation(fields: [userId], references: [id])
+  embeddingStatus EmbeddingStatus @default(PENDING)
 
-  embeddedAt        DateTime?
+  embeddedAt DateTime?
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Quiz {
+  id String @id @default(cuid())
+
+  title String
+
+  userId String
+  fileId String
+
+  status QuizStatus
+
+  totalQuestions  Int
+  durationMinutes Int
+
+  questions Question[]
+  attempts  QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Question {
+  id String @id @default(cuid())
+
+  quizId String
+
+  type QuestionType
+
+  question String
+
+  options String[]
+
+  correctAnswer String?
+
+  modelAnswer String?
+
+  explanation String?
+
+  difficulty Difficulty
+
+  marks Int
+
+  order Int
+
+  quiz Quiz @relation(fields: [quizId], references: [id])
+}
+
+model QuizAttempt {
+  id String @id @default(cuid())
+
+  quizId String
+  userId String
+
+  quiz Quiz @relation(fields: [quizId], references: [id])
+
+  status AttemptStatus
+
+  startedAt   DateTime
+  submittedAt DateTime?
+
+  score      Int?
+  percentage Float?
+
+  timeTakenSeconds Int?
+
+  responses QuizResponse[]
+
+  @@unique([quizId, userId])
+}
+
+model QuizResponse {
+  id String @id @default(cuid())
+
+  attemptId  String
+  questionId String
+
+  answer String
+
+  isCorrect Boolean?
+
+  obtainedMarks Float?
+
+  feedback String?
+
+  attempt QuizAttempt @relation(fields: [attemptId], references: [id])
 }
 
 enum EmbeddingStatus {
@@ -53,4 +138,28 @@ enum EmbeddingStatus {
   PROCESSING
   COMPLETED
   FAILED
+}
+
+enum QuizStatus {
+  PROCESSING
+  READY
+  FAILED
+}
+
+enum QuestionType {
+  MCQ
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+  EXPIRED
 }

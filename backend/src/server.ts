@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route'
 import uploadRouter from './routes/upload.route'
 import documentRouter from './routes/document.route'
 import chatRouter from './routes/chat.route'
+import quizRouter from './routes/quiz.route'
 import path from "node:path";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/v1', authRouter);
 app.use('/api/v1', uploadRouter);
 app.use('/api/v1', documentRouter);
 app.use('/api/v1', chatRouter);
+app.use('/api/v1', quizRouter);
 
 app.get("/", (req: Request, res: Response) => {
     res.json({ message: "Hello from TypeScript backend!" });

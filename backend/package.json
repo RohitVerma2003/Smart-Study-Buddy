@@ -8,6 +8,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "worker": "ts-node-dev --respawn --transpile-only src/worker.ts",
+    "quiz-worker": "ts-node-dev --respawn --transpile-only src/quiz-worker.ts",
     "qdrantsetup": "ts-node-dev --respawn --transpile-only src/utilities/qdrantSetup.ts"
   },
   "keywords": [],
@@ -31,7 +32,8 @@
     "jsonwebtoken": "^9.0.3",
     "langchain": "^1.4.4",
     "multer": "^2.1.1",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^2.4.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
