@@ -89,35 +89,25 @@ export class IngestionService {
             return { status: file.embeddingStatus };
         }
 
-        // const quiz = await prisma.quiz.create({
-        //     data: {
-        //         title: `Quiz ${file.fileName} - ${Date.now()}`,
-        //         userId,
-        //         fileId,
-        //         status: "PROCESSING",
-        //         totalQuestions: 20,
-        //         durationMinutes: 25
-        //     }
-        // });
+        const quiz = await prisma.quiz.create({
+            data: {
+                title: `Quiz ${file.fileName} - ${Date.now()}`,
+                userId,
+                fileId,
+                status: "PROCESSING",
+                totalQuestions: 20,
+                durationMinutes: 25
+            }
+        });
 
         await this.quiz_queue.add('quiz-job', {
-            quizId: "cmqc2zpsp0000y0uh4w34bl96",
+            quizId: quiz.id,
             userId,
             fileId,
             path: file.path
         })
 
-        return {
-            "id": "cmqc2zpsp0000y0uh4w34bl96",
-            "title": "Quiz 1781245864685-sql interview questions.pdf - 1781338570578",
-            "userId": "cmpz54uom0000msuh41nchogp",
-            "fileId": "cmqajsphg0000fkuh5hlordaa",
-            "status": "PROCESSING",
-            "totalQuestions": 20,
-            "durationMinutes": 25,
-            "createdAt": "2026-06-13T08:16:10.585Z",
-            "updatedAt": "2026-06-13T08:16:10.585Z"
-        };
+        return quiz;
     }
 
     docStatus = async (fileId: string) => {
