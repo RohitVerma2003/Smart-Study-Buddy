@@ -89,6 +89,19 @@ export class IngestionService {
             return { status: file.embeddingStatus };
         }
 
+        const activeQuiz = await prisma.quiz.findFirst({
+            where: {
+                fileId,
+                status: {
+                    in: ["PROCESSING"]
+                }
+            }
+        });
+
+        if (activeQuiz) {
+            throw new AppError(409 , "A quiz is already being generated for this document.");
+        }
+
         const quiz = await prisma.quiz.create({
             data: {
                 title: `Quiz ${file.fileName} - ${Date.now()}`,

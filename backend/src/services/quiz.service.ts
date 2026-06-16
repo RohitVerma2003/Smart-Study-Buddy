@@ -142,4 +142,25 @@ export class QuizService {
 
         return true;
     }
+
+    getAllQuizzes = async (userId: string)=>{
+        const quizzes = await prisma.quiz.findMany({
+            where:{
+                userId
+            }
+        });
+
+        return quizzes;
+    }
+
+    getQuiz = async (userId: string , quizId: string) => {
+        const quiz = await prisma.quiz.findFirst({
+            where:{
+                id: quizId,
+                userId
+            }
+        });
+
+        return quiz;
+    }
 }

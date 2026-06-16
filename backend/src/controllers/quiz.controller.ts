@@ -15,7 +15,8 @@ export class QuizController {
 
     generateQuiz = async (req: Request, res: Response) => {
         try {
-            const { userId, fileId } = req.params;
+            const { fileId } = req.params;
+            const userId = req.user?.userId;
             if (typeof (userId) != 'string' || typeof (fileId) != 'string') throw new Error("Invalid credentials");
 
             const result = await this.ingestionService.generateQuiz(userId, fileId);
@@ -78,6 +79,41 @@ export class QuizController {
             const result = await this.quizService.submitQuizResponse(quizId, attemptId, userId, answers);
             return res.status(200).json({
                 success: result,
+            });
+        } catch (error) {
+            console.log(error);
+            return this.handleError(error, res);
+        }
+    }
+
+    getAllQuizzes = async (req: Request, res: Response) => {
+        try {
+            const userId = req.user?.userId;
+            if (!userId) throw new AppError(404, "User not found");
+
+            const data = await this.quizService.getAllQuizzes(userId);
+            return res.status(200).json({
+                success: true,
+                data
+            });
+        } catch (error) {
+            console.log(error);
+            return this.handleError(error, res);
+        }
+    }
+
+    getQuiz = async (req: Request, res: Response) => {
+        try {
+            const userId = req.user?.userId;
+            const { quizId } = req.params;
+
+            if (!userId) throw new AppError(404, "User not found");
+            if (!quizId || typeof (quizId) != "string") throw new AppError(409, "Invalid credentials");
+
+            const data = await this.quizService.getQuiz(userId, quizId);
+            return res.status(200).json({
+                success: true,
+                data
             });
         } catch (error) {
             console.log(error);
