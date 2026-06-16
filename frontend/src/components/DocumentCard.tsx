@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
+import useQuiz from "../hooks/useQuiz";
 
 type DocumentCardProps = {
     document: any;
@@ -48,6 +49,7 @@ export default function DocumentCard({
     document, startEmbedding, embedding
 }: DocumentCardProps) {
     const navigate = useNavigate();
+    const { loading, generateQuiz } = useQuiz();
 
     const status =
         statusMap[
@@ -141,6 +143,15 @@ export default function DocumentCard({
                             Chat
                         </Button>
                     )}
+
+                    <Button
+                        variant={'outline'}
+                        className="flex-1 cursor-pointer bg-green-500"
+                        onClick={() => generateQuiz(document.id)}
+                        disabled={loading}
+                    >
+                        Generate Quiz
+                    </Button>
                 </div>
             </CardContent>
         </Card>
