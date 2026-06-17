@@ -86,7 +86,7 @@ export class IngestionService {
         if (!file) throw new AppError(404, "File not exists");
 
         if (file.embeddingStatus != "COMPLETED") {
-            return { status: file.embeddingStatus };
+            throw new AppError(400, "File is not yet embedded.");
         }
 
         const activeQuiz = await prisma.quiz.findFirst({
@@ -99,7 +99,7 @@ export class IngestionService {
         });
 
         if (activeQuiz) {
-            throw new AppError(409 , "A quiz is already being generated for this document.");
+            throw new AppError(409, "A quiz is already being generated for this document.");
         }
 
         const quiz = await prisma.quiz.create({

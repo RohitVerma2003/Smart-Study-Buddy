@@ -10,6 +10,7 @@ import Documents from "./pages/layout/Documents"
 import Canvas from "./pages/layout/Canvas"
 import Chat from "./pages/layout/Chat"
 import Quizzes from "./pages/layout/Quizzes"
+import Quiz from "./pages/layout/Quiz"
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/quiz/:quizId/:attemptId" element={<Quiz />} />
       </Routes>
     </>
   )
